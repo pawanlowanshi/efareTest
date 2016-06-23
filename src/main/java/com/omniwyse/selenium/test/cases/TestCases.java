@@ -2,6 +2,8 @@ package com.omniwyse.selenium.test.cases;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +21,17 @@ public class TestCases {
 	private Boolean result = true;
 	private String id;
 
-	public TestCases(String repositoryPath, XSSFRow row, String product) throws Exception {
+	public TestCases(String repositoryPath, XSSFRow row, String product, int inputID, String suiteName) throws Exception {
 		id = row.getCell(0).toString();
+		if("Not Applicable".equals(suiteName)){
+			new DataManager().executeMethods(repositoryPath + "Products/", product,inputID,getId());
+			DataManager.bufferedWriter.write(suiteName);
+			DataManager.bufferedWriter.newLine();
+		}else{
+			new DataManager().executeMethods(repositoryPath + "Products/", product,inputID,suiteName+"_"+getId());
+			DataManager.bufferedWriter.write(suiteName);
+			DataManager.bufferedWriter.newLine();
+		}
 		DataManager.bufferedWriter.write("," + getId());
 		DataManager.bufferedWriter.newLine();
 		path = row.getCell(1).toString();
@@ -41,6 +52,8 @@ public class TestCases {
 				if (!"yes".equalsIgnoreCase(ExcelUtils.getCellValByIndex(sheet, rowIndex, 4))) {
 					continue;
 				}
+				Files.createDirectories(Paths.get(DataManager.resultPath +"/"+ getId()));
+
 				TestCaseStep testCaseStep = new TestCaseStep(repositoryPath, sheet.getRow(rowIndex), getId(), product);
 				if (!testCaseStep.getActualResult().equals(testCaseStep.getExpectedResult()))
 					localResult = false;
