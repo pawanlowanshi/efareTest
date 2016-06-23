@@ -80,7 +80,7 @@ public class DataManager {
 		resultPath = repositoryPath + product + "/Results/" + currentDate + FILE_SEPERATOR + timestamp;
 		System.out.println(DataManager.resultPath + "/");
 		Files.createDirectories(Paths.get(resultPath));
-		bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultPath + "/" + testCaseName + ".csv"), "UTF-16"));
+		bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultPath + "/Logs_" + testCaseName + ".csv"), "UTF-16"));
 		bufferedWriter.write("TSName,TCName,TCStepNo,Description,AppFuncName,AppStepNo,AppStepName,Params,Status\n");
 		extractAppFunctions(repositoryPath + product + FILE_SEPERATOR);
 		extractConfig(repositoryPath, product);
