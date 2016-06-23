@@ -76,11 +76,11 @@ public class DataManager {
 		System.out.println("*****************************************************");
 	}
 
-	public void executeMethods(String repositoryPath, String product, int id) throws Exception {
+	public void executeMethods(String repositoryPath, String product, int id, String testCaseName) throws Exception {
 		resultPath = repositoryPath + product + "/Results/" + currentDate + FILE_SEPERATOR + timestamp;
 		System.out.println(DataManager.resultPath + "/");
 		Files.createDirectories(Paths.get(resultPath));
-		bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultPath + "/Reporting_" + id + ".csv"), "UTF-16"));
+		bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultPath + "/" + testCaseName + ".csv"), "UTF-16"));
 		bufferedWriter.write("TSName,TCName,TCStepNo,Description,AppFuncName,AppStepNo,AppStepName,Params,Status\n");
 		extractAppFunctions(repositoryPath + product + FILE_SEPERATOR);
 		extractConfig(repositoryPath, product);
@@ -251,16 +251,6 @@ public class DataManager {
 				SeleniumFramework.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				SeleniumFramework.driver.manage().window().maximize();
 			}
-			/*
-			 * DesiredCapabilities capabilities = new DesiredCapabilities();
-			 * System.setProperty("webdriver.chrome.driver",
-			 * "D:\\IBaseDev\\oWyseTest\\Drivers\\chromedriver.exe");
-			 * SeleniumFramework.driver = new ChromeDriver(capabilities);
-			 * SeleniumFramework.driver.manage().timeouts().implicitlyWait(10,
-			 * TimeUnit.SECONDS);
-			 * SeleniumFramework.driver.manage().window().maximize();
-			 */
-			// SeleniumFramework.driver.get("http://cdta-qa.gfcp.io/efare/");
 		}
 
 	}
