@@ -49,7 +49,7 @@ public class AppFunctionStep {
 		this.object = object;
 	}
 
-	public Boolean execute(List<Param> parentParams, String product, int sno, String appFunctionName) throws Exception {
+	public Boolean execute(List<Param> parentParams, String product, String testCaseName, int sno, String appFunctionName) throws Exception {
 		DataManager.bufferedWriter.write(", , , , ," + getSno() + "," + getAction() + ",");
 		System.out.println("App Step Execute");
 		String xpath = null;
@@ -70,7 +70,7 @@ public class AppFunctionStep {
 		System.out.println("XPATH:::::" + xpath);
 		java.lang.reflect.Method method = getFrameworkInstance(product).getClass().getMethod(getAction(), String.class, List.class);
 		System.out.println("Invoking Framework Methods");
-		Reporter.captureScreenShot(DataManager.resultPath+"/"+sno+"_"+appFunctionName);
+		Reporter.captureScreenShot(DataManager.resultPath+"/"+testCaseName+"/"+sno+"_"+appFunctionName,getAction());
 
 		for (Param appStepParam : getParams()) {
 			DataManager.bufferedWriter.write(appStepParam.getValue());
