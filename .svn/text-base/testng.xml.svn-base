@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test name="Test">
+		<!--The height of the browser window to be used for the tests. -->
+		<parameter name="browser_window_height" value="1600" />
+
+		<!--The height of the browser window to be used for the tests. -->
+		<parameter name="browser_window_width" value="900" />
+
+		<!--The Client from where you want to access the server through a browser. -->
+		<parameter name="grid_client" value="192.168.203.147" />
+		<parameter name="grid_client_port" value="5555" />
+
+		<!--The client browser, which browser you want to use -->
+		<parameter name="client_browser" value="chrome">
+		</parameter>
+		<classes>
+			<class name="EfareTest" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite --> 

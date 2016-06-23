@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/IBASEProjects/!svn/ver/125978/IbaseDev/efareTest
+END
+testng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/IBASEProjects/!svn/ver/125971/IbaseDev/efareTest/testng.xml
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/IBASEProjects/!svn/ver/125960/IbaseDev/efareTest/pom.xml
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/IBASEProjects/!svn/ver/125960/IbaseDev/efareTest/.project
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/IBASEProjects/!svn/ver/125960/IbaseDev/efareTest/.classpath
+END
+config.properties
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/IBASEProjects/!svn/ver/126081/IbaseDev/efareTest/config.properties
+END

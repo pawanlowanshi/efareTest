@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [Suite]">
+  <parameter name="client_browser" value="chrome"/>
+  <parameter name="browser_window_width" value="900"/>
+  <parameter name="grid_client" value="192.168.203.147"/>
+  <parameter name="browser_window_height" value="1600"/>
+  <parameter name="grid_client_port" value="5555"/>
+  <test name="Test">
+    <parameter name="client_browser" value="chrome"/>
+    <parameter name="browser_window_width" value="900"/>
+    <parameter name="grid_client" value="192.168.203.147"/>
+    <parameter name="browser_window_height" value="1600"/>
+    <parameter name="grid_client_port" value="5555"/>
+    <classes>
+      <class name="EfareTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Failed suite [Suite] -->

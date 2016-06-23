@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="487209" started-at="2016-06-23T07:45:24Z" finished-at="2016-06-23T07:53:31Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="487209" started-at="2016-06-23T07:45:24Z" finished-at="2016-06-23T07:53:31Z">
+      <class name="EfareTest">
+        <test-method status="PASS" signature="f(org.testng.xml.XmlTest)[pri:0, instance:EfareTest@5f2cfc0f]" name="f" duration-ms="487194" started-at="2016-06-23T13:15:24Z" finished-at="2016-06-23T13:23:31Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Test: "Test" verbose:1[parameters:client_browser=>chromebrowser_window_width=>900grid_client=>192.168.203.147browser_window_height=>1600grid_client_port=>5555][metagroups:] [included: ][excluded: ]  classes:[XmlClass class=EfareTest]  packages:] ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- f -->
+      </class> <!-- EfareTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
