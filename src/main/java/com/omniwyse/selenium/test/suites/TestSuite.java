@@ -9,13 +9,12 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.omniwyse.selenium.data.DataManager;
 import com.omniwyse.selenium.data.ExcelUtils;
 import com.omniwyse.selenium.test.cases.TestCases;
 
 public class TestSuite {
 	private int id;
-	private String product;
+	public static String product;
 	private String name;
 	private List<TestCases> testCases;
 	private Boolean result;
@@ -25,21 +24,19 @@ public class TestSuite {
 		id=(int)row.getCell(row.getLastCellNum() - 1).getNumericCellValue();
 		product = row.getCell(row.getLastCellNum() - 2).toString();
 		platform = row.getCell(2).toString();
-		new DataManager().executeMethods(repositoryPath + "Products/", getProduct(),getId());
-		System.out.println(repositoryPath + "Products/" + getProduct());
+		//new DataManager().executeMethods(repositoryPath + "Products/", getProduct(),getId());
+		//System.out.println(repositoryPath + "Products/" + getProduct());
 		if ("TestSuite".equals(row.getCell(1).toString())) {
 			name = row.getCell(0).toString();
-			DataManager.bufferedWriter.write(getName());
-			DataManager.bufferedWriter.newLine();
+
 			testCases = executeTestSuite(repositoryPath);
 		} else if ("TestCases".equals(row.getCell(1).toString())) {
 			name = "Not Applicable";
-			DataManager.bufferedWriter.write(getName());
-			DataManager.bufferedWriter.newLine();
+;
 			System.out.println("directly test case execution..");
 			TestCases testCase = null;
 			testCases = new ArrayList<TestCases>();
-			testCase = new TestCases(repositoryPath, row, getProduct());
+			testCase = new TestCases(repositoryPath, row, getProduct(),getId(),getName());
 			testCases.add(testCase);
 		} else {
 			throw new RuntimeException("Invalid Entry for Test Type in Test Plan file, Please check and re-enter");
@@ -59,7 +56,7 @@ public class TestSuite {
 				if (!"yes".equalsIgnoreCase(ExcelUtils.getCellValByIndex(sheet, rowIndex, 3))) {
 					continue;
 				}
-				TestCases testCase = new TestCases(repositoryPath, sheet.getRow(rowIndex), getProduct());
+				TestCases testCase = new TestCases(repositoryPath, sheet.getRow(rowIndex), getProduct(),getId(),getName());
 				if (testCase.getResult() == false)
 					localResult = false;
 				testCaseslist.add(testCase);
