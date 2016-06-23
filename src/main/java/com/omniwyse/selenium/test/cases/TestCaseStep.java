@@ -78,12 +78,12 @@ public class TestCaseStep {
 			return;
 
 		System.out.println("Functions size " + appFunction.getFunctions().size());
-		Files.createDirectories(Paths.get(DataManager.resultPath +"/"+ getSno()+"_"+getKeyword()));
+		Files.createDirectories(Paths.get(DataManager.resultPath +"/"+ testCaseName+"/"+getSno()+"_"+getKeyword()));
 		Iterator<AppFunctionStep> itr = appFunction.getFunctions().iterator();
 		while (itr.hasNext()) {
 			System.out.println("Inside Iterator App Step Execute..");
 			AppFunctionStep appStep = itr.next();
-			setActualResult(appStep.execute(parentParams, product, getSno(), getKeyword()));
+			setActualResult(appStep.execute(parentParams, product,testCaseName , getSno(), getKeyword()));
 			boolean flag = false;
 			if (getActualResult().equals(getExpectedResult()))
 				flag = true;
