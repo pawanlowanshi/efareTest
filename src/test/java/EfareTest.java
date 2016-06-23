@@ -23,8 +23,8 @@ public class EfareTest {
 		DataManager.currentDate = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
 		DataManager.timestamp = new SimpleDateFormat("HH_mm_ss").format(Calendar.getInstance().getTime());
 		System.out.println(DataManager.currentDate);
-		System.out.println("this is our repository path " +  properties.getProperty("rootPath")+"  "+repPath);
-		new DataManager().executeTestPlan( repPath, DataManager.currentDate);
+		//System.out.println("this is our repository path " +  properties.getProperty("rootPath")+"  "+repPath);
+		new DataManager().executeTestPlan( repPath.replace('\\', '/'), DataManager.currentDate);
 		System.out.println("Input(TestPlan) file reading is done..");
 	}
 }
