@@ -8,7 +8,6 @@ import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -33,31 +32,27 @@ public class Reporter {
 																			 * "D:/oWyseTestBase/Products/efare/Results/"
 																			 * + "TestPlan_Report.html"
 																			 */;
-	static String reportIn;
 
 	public static void writeReport(String repositoryPath, List<TestSuite> testSuites, String currentDate) throws Exception {
+		templatePath = repositoryPath + "Products/" + TestSuite.product + "/Results/" + "TestPlan_Report.html";
+		String reportIn = new String(Files.readAllBytes(Paths.get(templatePath)));
+		reportIn = reportIn.replaceFirst(currentHeading, "Report of TestPlan");
+		reportIn = reportIn.replaceFirst(currentDateandTime, currentDate);
 		for (int i = 0; i < testSuites.size(); i++) {
-			templatePath = repositoryPath + "Products/" + testSuites.get(i).getProduct() + "/Results/" + "TestPlan_Report.html";
-			reportIn = new String(Files.readAllBytes(Paths.get(templatePath)));
-			reportIn = reportIn.replaceFirst(currentHeading, "Report of TestPlan");
-			reportIn = reportIn.replaceFirst(currentDateandTime, currentDate);
 			reportIn = reportIn.replaceFirst(currentProduct, testSuites.get(i).getProduct());
 			if (testSuites.get(i).getName().equals("Not Applicable")) {
-				reportIn = reportIn.replaceFirst(resultPlaceholder,
-						"<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
-								+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffff99'><b>Not Applicable</b></font></td></tr>"
-								+ resultPlaceholder);
+				reportIn = reportIn.replaceFirst(resultPlaceholder, "<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
+						+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffff99'><b>Not Applicable</b></font></td></tr>"
+						+ resultPlaceholder);
 			} else {
 				if (testSuites.get(i).getResult() == true)
-					reportIn = reportIn.replaceFirst(resultPlaceholder,
-							"<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
-									+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#00cc00'><b>PASSED</b></font></td></tr>"
-									+ resultPlaceholder);
+					reportIn = reportIn.replaceFirst(resultPlaceholder, "<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
+							+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#00cc00'><b>PASSED</b></font></td></tr>"
+							+ resultPlaceholder);
 				else
-					reportIn = reportIn.replaceFirst(resultPlaceholder,
-							"<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
-									+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#cc3300'><b>FAILED</b></font></td></tr>"
-									+ resultPlaceholder);
+					reportIn = reportIn.replaceFirst(resultPlaceholder, "<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
+							+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#cc3300'><b>FAILED</b></font></td></tr>"
+							+ resultPlaceholder);
 			}
 
 			for (int j = 0; j < testSuites.get(i).getTestCases().size(); j++) {
@@ -76,12 +71,12 @@ public class Reporter {
 					if (testStep.getActualResult().equals(testStep.getExpectedResult()))
 						reportIn = reportIn.replaceFirst(resultPlaceholder,
 								"<tr><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#cc99ff'>" + testStep.getDescription() + "</td><td bgcolor='#ccccff'><a href="
-										+ "./" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
+										+ "./" + testCase.getId() + "/" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
 										+ "</a></td><td><font color='#00cc00'><b>PASSED</b></font></td></tr>" + resultPlaceholder);
 					else
 						reportIn = reportIn.replaceFirst(resultPlaceholder,
 								"<tr><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#cc99ff'>" + testStep.getDescription() + "</td><td bgcolor='ccccff'><a href="
-										+ "./" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
+										+ "./" + testCase.getId() + "/" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
 										+ "</a></td><td><font color='#cc3300'><b>FAILED</b></font></td></tr>" + resultPlaceholder);
 
 				}
@@ -92,11 +87,12 @@ public class Reporter {
 		Files.write(Paths.get(reportPath), reportIn.getBytes(), StandardOpenOption.CREATE);
 	}
 
-	public static void captureScreenShot(String directoryName) throws IOException {
+	public static void captureScreenShot(String directoryName,String action) throws IOException {
 		String fileNameFormat;
 		String fileName;
 		fileNameFormat = new SimpleDateFormat("HHmmss.SS").format(new Date());
-		fileName = directoryName + "/" + fileNameFormat + "_" + UUID.randomUUID().toString() + ".png";
+		//fileName = directoryName + "/" + fileNameFormat + "_" + UUID.randomUUID().toString() + ".png";
+		fileName = directoryName + "/" + fileNameFormat + "_" + action + ".png";
 		System.out.println("FileName:" + fileName);
 		WebDriver augmentedDriver = new Augmenter().augment(SeleniumFramework.driver);
 		File scrFile = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
