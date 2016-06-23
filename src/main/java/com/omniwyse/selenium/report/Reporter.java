@@ -43,18 +43,21 @@ public class Reporter {
 			reportIn = reportIn.replaceFirst(currentDateandTime, currentDate);
 			reportIn = reportIn.replaceFirst(currentProduct, testSuites.get(i).getProduct());
 			if (testSuites.get(i).getName().equals("Not Applicable")) {
-				reportIn = reportIn.replaceFirst(resultPlaceholder, "<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
-						+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffff99'><b>Not Applicable</b></font></td></tr>"
-						+ resultPlaceholder);
+				reportIn = reportIn.replaceFirst(resultPlaceholder,
+						"<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
+								+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffff99'><b>Not Applicable</b></font></td></tr>"
+								+ resultPlaceholder);
 			} else {
 				if (testSuites.get(i).getResult() == true)
-					reportIn = reportIn.replaceFirst(resultPlaceholder, "<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
-							+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#00cc00'><b>PASSED</b></font></td></tr>"
-							+ resultPlaceholder);
+					reportIn = reportIn.replaceFirst(resultPlaceholder,
+							"<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
+									+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#00cc00'><b>PASSED</b></font></td></tr>"
+									+ resultPlaceholder);
 				else
-					reportIn = reportIn.replaceFirst(resultPlaceholder, "<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
-							+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#cc3300'><b>FAILED</b></font></td></tr>"
-							+ resultPlaceholder);
+					reportIn = reportIn.replaceFirst(resultPlaceholder,
+							"<tr><td bgcolor='#0066ff'>" + testSuites.get(i).getName()
+									+ "</td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td><font color='#cc3300'><b>FAILED</b></font></td></tr>"
+									+ resultPlaceholder);
 			}
 
 			for (int j = 0; j < testSuites.get(i).getTestCases().size(); j++) {
@@ -73,37 +76,13 @@ public class Reporter {
 					if (testStep.getActualResult().equals(testStep.getExpectedResult()))
 						reportIn = reportIn.replaceFirst(resultPlaceholder,
 								"<tr><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#cc99ff'>" + testStep.getDescription() + "</td><td bgcolor='#ccccff'><a href="
-										+ DataManager.resultPath + "/" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
+										+ "./" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
 										+ "</a></td><td><font color='#00cc00'><b>PASSED</b></font></td></tr>" + resultPlaceholder);
 					else
 						reportIn = reportIn.replaceFirst(resultPlaceholder,
 								"<tr><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#cc99ff'>" + testStep.getDescription() + "</td><td bgcolor='ccccff'><a href="
-										+ DataManager.resultPath + "/" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
+										+ "./" + testStep.getSno() + "_" + testStep.getKeyword() + ">" + testStep.getKeyword()
 										+ "</a></td><td><font color='#cc3300'><b>FAILED</b></font></td></tr>" + resultPlaceholder);
-					/*
-					 * if
-					 * (testStep.getActualResult().equals(testStep.getExpectedResult()))
-					 * reportIn = reportIn.replaceFirst( resultPlaceholder,
-					 * "<tr><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#cc99ff'>"
-					 * + testStep.getDescription() + "</td><td bgcolor='#ccccff'>" +
-					 * testStep.getKeyword() +
-					 * "</td><td><font color='#00cc00'><b><a href='D:/oWyseTestBase/Products/"
-					 * + testSuites.get(i).getProduct()+"/Results/"+
-					 * DataManager.currentDate + "/" +
-					 * DataManager.timestamp+"/"+testStep.getSno() + "_" +
-					 * testStep.getKeyword() + "'>PASSED</a></b></font></td></tr>" +
-					 * resultPlaceholder); else reportIn = reportIn.replaceFirst(
-					 * resultPlaceholder,
-					 * "<tr><td bgcolor='#ffffff'></td><td bgcolor='#ffffff'></td><td bgcolor='#cc99ff'>"
-					 * + testStep.getDescription() + "</td><td bgcolor='ccccff'>" +
-					 * testStep.getKeyword() +
-					 * "</td><td><font color='#cc3300'><b><a href='D:/oWyseTestBase/Products/"
-					 * + testSuites.get(i).getProduct()+"/Results/"+
-					 * DataManager.currentDate + "/" +
-					 * DataManager.timestamp+"/"+testStep.getSno() + "_" +
-					 * testStep.getKeyword() + "'>FAILED</a></b></font></td></tr>" +
-					 * resultPlaceholder);
-					 */
 
 				}
 			}
