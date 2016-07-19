@@ -70,7 +70,6 @@ public class AppFunctionStep {
 		System.out.println("XPATH:::::" + xpath);
 		java.lang.reflect.Method method = getFrameworkInstance(product).getClass().getMethod(getAction(), String.class, List.class);
 		System.out.println("Invoking Framework Methods");
-		Reporter.captureScreenShot(DataManager.resultPath+"/"+testCaseName+"/"+sno+"_"+appFunctionName,getAction());
 
 		for (Param appStepParam : getParams()) {
 			DataManager.bufferedWriter.write(appStepParam.getValue());
@@ -80,6 +79,8 @@ public class AppFunctionStep {
 				DataManager.bufferedWriter.write(" | ");
 		}
 		boolean flag = (Boolean) method.invoke(getFrameworkInstance(product), xpath, extractParamsFromParent(parentParams));
+		if (!getAction().contains("getAndSetActive"))
+			Reporter.captureScreenShot(DataManager.resultPath + "/" + testCaseName + "/" + sno + "_" + appFunctionName, getAction());
 		if (flag == true)
 			DataManager.bufferedWriter.write("\n, , , , , , , ,PASS");
 		else
