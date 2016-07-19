@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.omniwyse.selenium.data.DataManager;
-import com.omniwyse.selenium.report.Reporter;
 import com.omniwyse.selenium.test.object.EfareObjectRepository;
 import com.omniwyse.selenium.test.param.Param;
 import com.omniwyse.selenium.utils.GmailUtility;
@@ -32,7 +31,6 @@ public class SeleniumFramework {
 			if(flag==false)
 				return flag;
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			//Reporter.captureScreenShot(DataManager.resultPath);
 			flag = true;
 			
 		} catch (Exception e) {
@@ -408,7 +406,6 @@ boolean flag=false;
 		boolean flag = false;
 		try {
 			List<WebElement> listchildProducts;
-			String cardType;
 			List<List<String>> checkpoutproductDetails;
 			List<WebElement> listSelectCard;
 			WebElement cardTypeElement;
@@ -488,7 +485,6 @@ boolean flag=false;
 			List<List<String>> checkpoutproductDetails;
 			List<WebElement> listSelectCard;
 			List<WebElement> listchildProducts;
-			String cardType;
 			WebElement cardTypeElement;
 			WebElement quantityElement;
 			WebElement priceElement;
@@ -718,21 +714,6 @@ boolean flag=false;
 		}
 		return flag;
 	}
-	private static boolean flagCheck(boolean flag) {
-		// TODO Auto-generated method stub
-		boolean conditionFlag = false;
-		try {
-			if(flag==true)
-				conditionFlag=true;
-			else if(flag==false)
-				conditionFlag = false;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return conditionFlag;
-	}
-
 	public static boolean enterManageBalCardDetails(String xpath, List<Param> params) throws NoSuchFieldException, SecurityException, Exception {
 		boolean flag = false;
 		try {
@@ -1362,5 +1343,4 @@ boolean flag=false;
 		return true;
 
 	}
-
 }
