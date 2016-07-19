@@ -94,7 +94,12 @@ public class Reporter {
 		//fileName = directoryName + "/" + fileNameFormat + "_" + UUID.randomUUID().toString() + ".png";
 		fileName = directoryName + "/" + fileNameFormat + "_" + action + ".png";
 		System.out.println("FileName:" + fileName);
-		WebDriver augmentedDriver = new Augmenter().augment(SeleniumFramework.driver);
+		WebDriver augmentedDriver;
+		if(DataManager.configInfo.get(TestSuite.product).get("Platform").equalsIgnoreCase("grid")|| DataManager.configInfo.get(TestSuite.product).get("Platform").equalsIgnoreCase("remote"))
+			augmentedDriver = new Augmenter().augment(SeleniumFramework.driver);
+		else
+			augmentedDriver = SeleniumFramework.driver;
+		
 		File scrFile = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(scrFile, new File(fileName), true);
 	}
