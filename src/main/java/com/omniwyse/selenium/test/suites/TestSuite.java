@@ -32,7 +32,6 @@ public class TestSuite {
 			testCases = executeTestSuite(repositoryPath);
 		} else if ("TestCases".equals(row.getCell(1).toString())) {
 			name = "Not Applicable";
-;
 			System.out.println("directly test case execution..");
 			TestCases testCase = null;
 			testCases = new ArrayList<TestCases>();
@@ -71,7 +70,7 @@ public class TestSuite {
 	}
 
 	public void setProduct(String product) {
-		this.product = product;
+		TestSuite.product = product;
 	}
 
 	public String getName() {
