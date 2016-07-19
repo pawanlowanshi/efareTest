@@ -34,11 +34,6 @@ import com.omniwyse.selenium.test.suites.TestSuite;
 import com.omniwyse.selenium.utils.Driver;
 
 public class DataManager {
-	// read all the app functions
-	// read Input Test File
-	// read Suite/Test Cases
-	// read Test Case Data
-	// Execute Test Cases - Map App Functions
 	static final String FILE_SEPERATOR = "/";
 	public static HashMap<String, AppFunction> appFunctions = new HashMap<String, AppFunction>();
 	public static HashMap<String, ObjectRepository> objRepositories = new HashMap<String, ObjectRepository>();
@@ -51,7 +46,6 @@ public class DataManager {
 	public static BufferedWriter bufferedWriter;
 	public static XmlTest config;
 
-	//
 	public void executeTestPlan(String repositoryPath, String currentDate) throws Exception {
 		System.out.println("repositoryPath Path is: " + repositoryPath);
 		System.out.println("starts reading input(TestPlan) file..");
@@ -65,11 +59,16 @@ public class DataManager {
 				if (!"yes".equalsIgnoreCase(ExcelUtils.getCellValByIndex(sheet, rowIndex, 3))) {
 					continue;
 				}
-				TestSuite testSuite = new TestSuite(repositoryPath, sheet.getRow(rowIndex));
-				testSuites.add(testSuite);
-				bufferedWriter.close();
-				objRepositories.clear();
-				// Reporter.report(testSuite);
+				
+				try {
+					TestSuite testSuite = new TestSuite(repositoryPath, sheet.getRow(rowIndex));
+					testSuites.add(testSuite);
+					bufferedWriter.close();
+					objRepositories.clear();
+					SeleniumFramework.driver.quit();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		Reporter.writeReport(repositoryPath,testSuites, currentDate);
@@ -233,7 +232,7 @@ public class DataManager {
 
 	public void driverInitializer(String product) throws MalformedURLException, InterruptedException {
 		if ("Selenium".equals(DataManager.configInfo.get(product).get("Framework"))) {
-			if (DataManager.configInfo.get(product).get("Platform").contains("grid"))
+			if (DataManager.configInfo.get(product).get("Platform").equalsIgnoreCase("grid")|| DataManager.configInfo.get(product).get("Platform").equalsIgnoreCase("remote"))
 				SeleniumFramework.driver = Driver.getDriver(config, product);
 			else {
 				if (DataManager.configInfo.get(product).get("Browser").equalsIgnoreCase("chrome")) {
